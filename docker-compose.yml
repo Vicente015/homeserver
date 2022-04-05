@@ -1,0 +1,113 @@
+version: '3'
+
+services:
+  # # Homer: fancy home page
+  # * Resources:
+  # - https://hub.docker.com/r/b4bz/homer
+  # - https://github.com/notthebee/homeserver/blob/efe0ee8e25f5549fa35eb1e24e10c0c58c74cb45/services/docker-compose.yml#L130-L144
+  # - https://youtu.be/f5jNJDaztqk?t=29
+  homer:
+    container_name: homer
+    image: b4bz/homer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - PUID=${UID}
+      - PGID=${GID}
+      - TZ=${TZ}
+    depends_on:
+      - caddy
+    volumes:
+      - $DATA/homer:/www/assets
+
+  # # Pihole: local dns server & adblock
+  # * Resources:
+  # - https://hub.docker.com/r/pihole/pihole
+  # - https://github.com/pi-hole/docker-pi-hole/
+  # - https://docs.pi-hole.net/
+  # - https://youtu.be/futIdbnWWys
+  # - https://github.com/futurorandomico/privacidad-desde-adentro/blob/d6d1ef5aaa4c13d6657e25a4f901ed41be98a0d2/Clase%202/docker.pihole.sh
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    restart: unless-stopped
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "81:80/tcp"
+    environment:
+      - TZ=${TZ}
+      - PIHOLE_DNS_=172.69.0.3#5053
+      - SERVER_IP=127.0.0.1
+    depends_on:
+      - cloudflared
+    networks:
+      pihole:
+        ipv4_address: 172.69.0.2
+    volumes:
+      - $DATA/pihole/data:/etc/pihole
+      - $DATA/pihole/dnsmasq:/etc/dnsmasq.d
+
+  # # Cloudflared: proxy-dns for DoH (DNS Over HTTPS)
+  # * Resources:
+  # - https://hub.docker.com/r/crazymax/cloudflared
+  # - https://github.com/crazy-max/docker-cloudflared
+  # - https://youtu.be/4OsD73OUaH0
+  # - https://github.com/futurorandomico/privacidad-desde-adentro/blob/d6d1ef5aaa4c13d6657e25a4f901ed41be98a0d2/Clase%202/docker.cloudflared.sh
+  cloudflared:
+    container_name: cloudflared
+    image: crazymax/cloudflared:latest
+    restart: unless-stopped
+    ports:
+      - "5053:5053/udp"
+      - "49312:49312"
+    environment:
+      - TZ=${TZ}
+      - TUNNEL_DNS_UPSTREAM=https://1.1.1.1/dns-query,https://1.0.0.1/dns-query
+    networks:
+      pihole:
+        ipv4_address: 172.69.0.3
+
+  # # Vaultwarden: password manager
+  # * Resources:
+  # - https://hub.docker.com/r/vaultwarden/server
+  # - https://github.com/dani-garcia/vaultwarden/wiki/Using-Docker-Compose
+  # - https://youtu.be/eCJA1F72izc
+  vaultwarden:
+    container_name: vaultwarden
+    image: vaultwarden/server:latest
+    restart: unless-stopped
+    ports:
+      - "82:80"
+    environment:
+      - TZ=${TZ}
+      - WEBSOCKET_ENABLED=true  # Enable WebSocket notifications.
+      - INVITATIONS_ALLOWED=false
+    depends_on:
+      - caddy
+    volumes:
+      - $DATA/vaultwarden/data:/data
+
+  # # Caddy: reverse proxy
+  # * Resources:
+  # - https://hub.docker.com/_/caddy
+  # - https://caddyserver.com/docs/running#docker-compose
+  caddy:
+    container_name: caddy
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - $DATA/caddy/caddy-config:/config
+      - $DATA/caddy/caddy-data:/data
+
+networks:
+  pihole:
+    attachable: true
+    ipam:
+      config:
+        - subnet: 172.69.0.0/24
