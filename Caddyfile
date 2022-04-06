@@ -1,4 +1,7 @@
-vaultwarden.box {
+
+vaultwarden.local {
+  tls internal
+
   # This setting may have compatibility issues with some browsers
   # (e.g., attachment downloading on Firefox). Try disabling this
   # if you encounter issues.
@@ -8,17 +11,17 @@ vaultwarden.box {
   reverse_proxy /notifications/hub vaultwarden:3012
 
   # Proxy everything else to Rocket
-  reverse_proxy vaultwarden:82 {
+  reverse_proxy vaultwarden:80 {
        # Send the true remote IP to Rocket, so that vaultwarden can put this in the
        # log, so that fail2ban can ban the correct IP.
        header_up X-Real-IP {remote_host}
   }
 }
 
-homer.box {
+homer.local {
   reverse_proxy homer:8080
 }
 
-pihole.box {
-  reverse_proxy pihole:81
+pihole.local {
+  reverse_proxy 192.168.0.173:81
 }
