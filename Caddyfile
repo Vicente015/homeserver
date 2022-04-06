@@ -1,5 +1,5 @@
 
-vaultwarden.local, contraseñas.local, vault.local {
+vaultwarden.local, vault.local {
   tls internal
 
   # This setting may have compatibility issues with some browsers
@@ -22,6 +22,6 @@ homer.local, home.local {
   reverse_proxy homer:8080
 }
 
-pihole.local, pi.hole {
+pihole.local {
   reverse_proxy 192.168.0.173:81
 }
