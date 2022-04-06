@@ -18,7 +18,7 @@ vaultwarden.local, vault.local, contraseñas.local, contras.local {
   }
 }
 
-homer.local, home.local {
+homer.local, home.local, casa.local {
   reverse_proxy homer:8080
 }
 

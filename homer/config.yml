@@ -2,8 +2,8 @@
 # Homepage configuration
 # See https://fontawesome.com/v5/search for icons options
 
-title: "Homepage"
-subtitle: "vibrant@pi"
+title: "Panel de control"
+subtitle: "Homer"
 logo: "assets/icons/vibrant.png"
 
 header: true
@@ -47,18 +47,20 @@ colors:
 # First level array represent a group.
 # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
 services:
-  - name: "Services"
+  - name: "Servicios"
     icon: "fas fa-stream"
     items:
       - name: "Bitwarden"
+        subtitle: "Gestor de contraseñas"
         logo: "assets/icons/vaultwarden.png"
-        url: "https://vaultwarden.local"
+        url: "https://contras.local"
         target: "_blank"
 
-  - name: "System"
+  - name: "Sistema"
     icon: "fas fa-cog"
     items:
       - name: "PiHole"
+        subtitle: "Servidor DNS local y bloqueador de anuncios y malware"
         logo: "assets/icons/pihole.png"
         url: "https://pihole.local"
         target: "_blank"
