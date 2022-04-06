@@ -7,6 +7,9 @@ subtitle: "Homer"
 logo: "assets/icons/vibrant.png"
 
 header: true
+footer: false
+columns: 2
+connectivityCheck: true
 
 stylesheet:
   - "assets/css/custom.css"
@@ -57,6 +60,6 @@ services:
     icon: "fas fa-cog"
     items:
       - name: "PiHole"
-        logo: "assets/icons/pihole.png.png"
+        logo: "assets/icons/pihole.png"
         url: "https://pihole.local"
         target: "_blank"
