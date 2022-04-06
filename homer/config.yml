@@ -4,12 +4,12 @@
 
 title: "VibrantPi"
 subtitle: "Homer"
-logo: "icons/vibrant.png"
+logo: "assets/icons/vibrant.png"
 
 header: true
 
 stylesheet:
-  - "css/custom.css"
+  - "assets/css/custom.css"
 
 # Optional theme customization
 theme: default
@@ -49,7 +49,7 @@ services:
     icon: "fas fa-stream"
     items:
       - name: "Bitwarden"
-        logo: "icons/vaultwarden.png"
+        logo: "assets/icons/vaultwarden.png"
         url: "https://vaultwarden.local"
         target: "_blank"
 
@@ -57,6 +57,6 @@ services:
     icon: "fas fa-cog"
     items:
       - name: "PiHole"
-        logo: "icons/pihole.png.png"
+        logo: "assets/icons/pihole.png.png"
         url: "https://pihole.local"
         target: "_blank"
