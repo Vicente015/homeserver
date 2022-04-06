@@ -1,5 +1,5 @@
 
-vaultwarden.local, vault.local {
+vaultwarden.local, vault.local, contraseñas.local, contras.local {
   tls internal
 
   # This setting may have compatibility issues with some browsers
