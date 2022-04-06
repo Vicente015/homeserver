@@ -43,7 +43,7 @@ services:
       - VIRTUAL_HOST=pihole.local
     depends_on:
       - cloudflared
-    networks:      
+    networks:
       pihole:
         ipv4_address: 172.69.0.2
     volumes:
