@@ -1,0 +1,8 @@
+# Local certificates generated with mkcert
+certs/
+
+# Homer sample files
+homer/tools
+homer/*.dist
+homer/*.sample*
+homer/manifest.json

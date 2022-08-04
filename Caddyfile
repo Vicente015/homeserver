@@ -1,7 +1,15 @@
+home.local, casa.local, home.box {
+  tls /root/certs/cert.pem /root/certs/key.pem
+  reverse_proxy homer:8080
+}
 
-vaultwarden.local, vault.local, contraseñas.local, contras.local {
-  tls internal
+pihole.local, pihole.box {
+  tls /root/certs/cert.pem /root/certs/key.pem
+  reverse_proxy 192.168.0.173:81
+}
 
+vaultwarden.local, vault.local, contraseñas.local, contras.local, vault.box {
+  tls /root/certs/cert.pem /root/certs/key.pem
   # This setting may have compatibility issues with some browsers
   # (e.g., attachment downloading on Firefox). Try disabling this
   # if you encounter issues.
@@ -18,10 +26,12 @@ vaultwarden.local, vault.local, contraseñas.local, contras.local {
   }
 }
 
-homer.local, home.local, casa.local {
-  reverse_proxy homer:8080
+openbooks.local, openbooks.box {
+  tls /root/certs/cert.pem /root/certs/key.pem
+  reverse_proxy openbooks:80
 }
 
-pihole.local {
-  reverse_proxy 192.168.0.173:81
+wallabag.local, wallabag.box {
+  tls /root/certs/cert.pem /root/certs/key.pem
+  reverse_proxy wallabag:80
 }

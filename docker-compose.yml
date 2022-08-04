@@ -13,8 +13,8 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - PUID=${UID}
-      - PGID=${GID}
+      - PUID=1001
+      - PGID=1001
       - TZ=${TZ}
     depends_on:
       - caddy
@@ -49,6 +49,7 @@ services:
     volumes:
       - $DATA/pihole/data:/etc/pihole
       - $DATA/pihole/dnsmasq:/etc/dnsmasq.d
+      - ./pihole/resolv.conf:/etc/resolv.conf
 
   # # Cloudflared: proxy-dns for DoH (DNS Over HTTPS)
   # * Resources:
@@ -90,6 +91,43 @@ services:
     volumes:
       - $DATA/vaultwarden/data:/data
 
+  # # Openbooks: ebook downloader
+  # * Resources:
+  # - https://github.com/evan-buss/openbooks
+  openbooks:
+    container_name: openbooks
+    image: evanbuss/openbooks:latest
+    restart: unless-stopped
+    ports:
+      - "83:80"
+    command: --persist
+    environment:
+      - BASE_PATH=/
+    depends_on:
+      - caddy
+    volumes:
+      - $DATA/books/:/books
+
+  # # Wallabag: read later/bookmarks app
+  # * Resouces:
+  # - https://github.com/wallabag/wallabag
+  # - https://doc.wallabag.org/en/admin/installation/installation.html#installation-with-docker
+  # - https://hub.docker.com/r/wallabag/wallabag/
+  wallabag:
+    container_name: wallabag
+    image: wallabag/wallabag:latest
+    restart: unless-stopped
+    ports:
+      - 84:80
+    environment:
+      - SYMFONY__ENV__DOMAIN_NAME=http://wallabag.box
+      - SYMFONY__ENV__FOSUSER_REGISTRATION=false
+    depends_on:
+      - caddy
+    volumes:
+      - $DATA/wallabag/data:/var/www/wallabag/data
+      - $DATA/wallabag/images:/var/www/wallabag/web/assets/images
+
   # # Caddy: reverse proxy
   # * Resources:
   # - https://hub.docker.com/_/caddy
@@ -103,6 +141,7 @@ services:
       - "443:443"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./certs/:/root/certs # to sync mkcert certificates to Caddy
       - $DATA/caddy/caddy-config:/config
       - $DATA/caddy/caddy-data:/data
 
