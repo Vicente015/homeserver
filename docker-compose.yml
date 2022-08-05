@@ -12,10 +12,7 @@ services:
     restart: unless-stopped
     ports:
       - "8080:8080"
-    environment:
-      - PUID=1001
-      - PGID=1001
-      - TZ=${TZ}
+    user: 1001:1001
     depends_on:
       - caddy
     volumes:
