@@ -9,3 +9,16 @@
 * [Vaultwarden](https://github.com/dani-garcia/vaultwarden): password manager.
 * [Openbooks](https://github.com/evan-buss/openbooks): ebook downloader.
 * [Wallabag](https://github.com/wallabag/wallabag): read later/bookmarks app.
+
+## Things that I usually forgot
+
+### How to generate a local certificate
+
+Using [mkcert](https://github.com/FiloSottile/mkcert).
+
+1. Generate certificates:
+  `mkcert home.local home.box pihole.local pihole.box vault.local vault.box openbooks.local openbooks.box wallabag.local wallabag.box tab.local tab.box`.
+2. Install them on the computer and your browser:
+  `mkcert -install`.
+3. Make sure to copy the certificates to a `certs/` folder on the server machine and name the certificates `cert.pem` and `key.pem`.
+4. Enjoy your own local domain ;).

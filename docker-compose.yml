@@ -139,6 +139,7 @@ services:
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - ./certs/:/root/certs # to sync mkcert certificates to Caddy
+      - ./tabspace/:/etc/tabspace
       - $DATA/caddy/caddy-config:/config
       - $DATA/caddy/caddy-data:/data
 

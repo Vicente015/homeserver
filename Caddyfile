@@ -35,3 +35,9 @@ wallabag.local, wallabag.box {
   tls /root/certs/cert.pem /root/certs/key.pem
   reverse_proxy wallabag:80
 }
+
+tab.local, tab.box {
+  tls /root/certs/cert.pem /root/certs/key.pem
+  root * /etc/tabspace/
+  file_server
+}

@@ -6,3 +6,6 @@ homer/tools
 homer/*.dist
 homer/*.sample*
 homer/manifest.json
+
+# Ignore tabspace folder
+tabspace
