@@ -41,8 +41,3 @@ tab.local, tab.box {
   root * /etc/tabspace/
   file_server
 }
-
-nextcloud.local, nextcloud.box {
-  tls /root/certs/cert.pem /root/certs/key.pem
-  reverse_proxy nextcloud:443
-}

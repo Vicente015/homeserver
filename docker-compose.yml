@@ -91,19 +91,19 @@ services:
   # # Openbooks: ebook downloader
   # * Resources:
   # - https://github.com/evan-buss/openbooks
-  openbooks:
-    container_name: openbooks
-    image: evanbuss/openbooks:latest
-    restart: unless-stopped
-    ports:
-      - "83:80"
-    command: --persist
-    environment:
-      - BASE_PATH=/
-    depends_on:
-      - caddy
-    volumes:
-      - $DATA/books/:/books
+  #openbooks:
+  #  container_name: openbooks
+  #  image: evanbuss/openbooks:latest
+  #  restart: unless-stopped
+  #  ports:
+  #    - "83:80"
+  #  command: --persist
+  #  environment:
+  #    - BASE_PATH=/
+  #  depends_on:
+  #    - caddy
+  #  volumes:
+  #    - $DATA/books/:/books
 
   # # Wallabag: read later/bookmarks app
   # * Resources:
@@ -124,21 +124,6 @@ services:
     volumes:
       - $DATA/wallabag/data:/var/www/wallabag/data
       - $DATA/wallabag/images:/var/www/wallabag/web/assets/images
-
-  # # Nextcloud: personal cloud
-  # * Resources:
-  # - https://docs.linuxserver.io/images/docker-nextcloud
-  nextcloud:
-    container_name: nextcloud
-    image: lscr.io/linuxserver/nextcloud:latest
-    environment:
-      - TZ=${TZ}
-    volumes:
-      - $DATA/nextcloud/config:/config
-      - $DATA/nextcloud/data:/data
-    ports:
-      - 85:443
-    restart: unless-stopped
 
   # # Caddy: reverse proxy
   # * Resources:
