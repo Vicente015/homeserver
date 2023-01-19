@@ -106,7 +106,7 @@ services:
       - $DATA/books/:/books
 
   # # Wallabag: read later/bookmarks app
-  # * Resouces:
+  # * Resources:
   # - https://github.com/wallabag/wallabag
   # - https://doc.wallabag.org/en/admin/installation/installation.html#installation-with-docker
   # - https://hub.docker.com/r/wallabag/wallabag/
@@ -124,6 +124,21 @@ services:
     volumes:
       - $DATA/wallabag/data:/var/www/wallabag/data
       - $DATA/wallabag/images:/var/www/wallabag/web/assets/images
+
+  # # Nextcloud: personal cloud
+  # * Resources:
+  # - https://docs.linuxserver.io/images/docker-nextcloud
+  nextcloud:
+    container_name: nextcloud
+    image: lscr.io/linuxserver/nextcloud:latest
+    environment:
+      - TZ=${TZ}
+    volumes:
+      - $DATA/nextcloud/config:/config
+      - $DATA/nextcloud/data:/data
+    ports:
+      - 85:443
+    restart: unless-stopped
 
   # # Caddy: reverse proxy
   # * Resources:
