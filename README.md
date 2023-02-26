@@ -17,7 +17,7 @@
 Using [mkcert](https://github.com/FiloSottile/mkcert).
 
 1. Generate certificates:
-  `mkcert home.local home.box pihole.local pihole.box vault.local vault.box openbooks.local openbooks.box wallabag.local wallabag.box tab.local tab.box`.
+  `mkcert home.local home.box pihole.local pihole.box vault.local vault.box openbooks.local openbooks.box wallabag.local wallabag.box tab.local tab.box memos.local memos.box`.
 2. Install them on the computer and your browser:
   `mkcert -install`.
 3. Make sure to copy the certificates to a `certs/` folder on the server machine and name the certificates `cert.pem` and `key.pem`.

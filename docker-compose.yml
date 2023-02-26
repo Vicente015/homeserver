@@ -132,7 +132,7 @@ services:
   # - https://github.com/usememos/memos/blob/43575e6f54f341861e2ac88d62da30f011d003ca/docker-compose.yaml
   memos:
     container_name: memos
-    image: neosmemo/memos:latest
+    image: raisinbear/memos-unofficial-arm:latest
     restart: unless-stopped
     ports:
       - 85:5230
