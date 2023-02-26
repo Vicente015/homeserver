@@ -37,7 +37,7 @@ services:
       - TZ=${TZ}
       - PIHOLE_DNS_=172.69.0.3#5053
       - SERVER_IP=127.0.0.1
-      - VIRTUAL_HOST=pihole.local
+      - VIRTUAL_HOST=pihole.box
     depends_on:
       - cloudflared
     networks:
@@ -78,7 +78,7 @@ services:
     image: vaultwarden/server:latest
     restart: unless-stopped
     ports:
-      - "82:80"
+      - 82:80
     environment:
       - TZ=${TZ}
       - WEBSOCKET_ENABLED=true  # Enable WebSocket notifications.
@@ -91,19 +91,19 @@ services:
   # # Openbooks: ebook downloader
   # * Resources:
   # - https://github.com/evan-buss/openbooks
-  #openbooks:
-  #  container_name: openbooks
-  #  image: evanbuss/openbooks:latest
-  #  restart: unless-stopped
-  #  ports:
-  #    - "83:80"
-  #  command: --persist
-  #  environment:
-  #    - BASE_PATH=/
-  #  depends_on:
-  #    - caddy
-  #  volumes:
-  #    - $DATA/books/:/books
+  # openbooks:
+  #   container_name: openbooks
+  #   image: evanbuss/openbooks:latest
+  #   restart: unless-stopped
+  #   ports:
+  #     - 83:80
+  #   command: --persist
+  #   environment:
+  #     - BASE_PATH=/
+  #   depends_on:
+  #     - caddy
+  #   volumes:
+  #     - $DATA/books/:/books
 
   # # Wallabag: read later/bookmarks app
   # * Resources:
@@ -124,6 +124,22 @@ services:
     volumes:
       - $DATA/wallabag/data:/var/www/wallabag/data
       - $DATA/wallabag/images:/var/www/wallabag/web/assets/images
+
+  # # Memos: Memo hub
+  # * Resouces:
+  # - https://usememos.com/
+  # - https://github.com/usememos/memos
+  # - https://github.com/usememos/memos/blob/43575e6f54f341861e2ac88d62da30f011d003ca/docker-compose.yaml
+  memos:
+    container_name: memos
+    image: neosmemo/memos:latest
+    restart: unless-stopped
+    ports:
+      - 85:5230
+    depends_on:
+      - caddy
+    volumes:
+      - $DATA/memos/data:/var/opt/memos
 
   # # Caddy: reverse proxy
   # * Resources:

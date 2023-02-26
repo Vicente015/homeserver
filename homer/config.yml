@@ -9,7 +9,7 @@ logo: "assets/icons/vibrant.png"
 header: true
 footer: false
 columns: 2
-connectivityCheck: true
+connectivityCheck: false
 
 stylesheet:
   - "assets/css/custom.css"
@@ -50,7 +50,7 @@ services:
   - name: "Servicios"
     icon: "fas fa-stream"
     items:
-      - name: "Bitwarden"
+      - name: "Vaultwarden"
         subtitle: "Gestor de contraseñas"
         logo: "assets/icons/vaultwarden.png"
         url: "https://vault.box"
@@ -59,10 +59,16 @@ services:
         subtitle: "Ebooks"
         logo: "assets/icons/openbooks.png"
         url: "https://openbooks.box"
+        target: "_blank"
       - name: "Wallabag"
         subtitle: "Lista de leer más tarde/artículos guardados"
         logo: "assets/icons/wallabag.png"
         url: "https://wallabag.box"
+        target: "_blank"
+      - name: "Memos"
+        subtitle: "Registro de notas, cosas que recordar"
+        logo: "assets/icons/memos.png"
+        url: "https://memos.box"
 
   - name: "Sistema"
     icon: "fas fa-cog"
@@ -70,5 +76,5 @@ services:
       - name: "PiHole"
         subtitle: "Servidor DNS local y bloqueador de anuncios y malware"
         logo: "assets/icons/pihole.png"
-        url: "https://pihole.box"
+        url: "https://pihole.box/admin"
         target: "_blank"

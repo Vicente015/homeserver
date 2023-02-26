@@ -5,7 +5,7 @@ home.local, casa.local, home.box {
 
 pihole.local, pihole.box {
   tls /root/certs/cert.pem /root/certs/key.pem
-  reverse_proxy 192.168.0.173:81
+  reverse_proxy pihole:80
 }
 
 vaultwarden.local, vault.local, contraseñas.local, contras.local, vault.box {
@@ -20,9 +20,9 @@ vaultwarden.local, vault.local, contraseñas.local, contras.local, vault.box {
 
   # Proxy everything else to Rocket
   reverse_proxy vaultwarden:80 {
-       # Send the true remote IP to Rocket, so that vaultwarden can put this in the
-       # log, so that fail2ban can ban the correct IP.
-       header_up X-Real-IP {remote_host}
+    # Send the true remote IP to Rocket, so that vaultwarden can put this in the
+    # log, so that fail2ban can ban the correct IP.
+    header_up X-Real-IP {remote_host}
   }
 }
 
@@ -36,6 +36,12 @@ wallabag.local, wallabag.box {
   reverse_proxy wallabag:80
 }
 
+memos.local, memos.box {
+  tls /root/certs/cert.pem /root/certs/key.pem
+  reverse_proxy memos:80
+}
+
+# todo: should dockerize it in the future
 tab.local, tab.box {
   tls /root/certs/cert.pem /root/certs/key.pem
   root * /etc/tabspace/
