@@ -38,7 +38,12 @@ wallabag.local, wallabag.box {
 
 memos.local, memos.box {
   tls /root/certs/cert.pem /root/certs/key.pem
-  reverse_proxy memos:80
+  reverse_proxy memos:5230
+}
+
+radicale.local, radicale.box {
+  tls /root/certs/cert.pem /root/certs/key.pem
+  reverse_proxy radicale:5232
 }
 
 # todo: should dockerize it in the future
@@ -46,4 +51,17 @@ tab.local, tab.box {
   tls /root/certs/cert.pem /root/certs/key.pem
   root * /etc/tabspace/
   file_server
+}
+
+cloud.local, cloud.box {
+  tls /root/certs/cert.pem /root/certs/key.pem
+  reverse_proxy 192.168.0.176:443 {
+    header_up Host {upstream_hostport}
+    header_up X-Real-IP {remote_host}
+  }
+}
+
+photos.local, photos.box {
+  tls /root/certs/cert.pem /root/certs/key.pem
+  reverse_proxy 192.168.0.176:2342
 }

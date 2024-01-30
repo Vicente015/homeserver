@@ -141,6 +141,19 @@ services:
     volumes:
       - $DATA/memos/data:/var/opt/memos
 
+  # # Radicale: CalDAV server
+  # * Resources:
+  # - https://hub.docker.com/r/ugeek/radicale
+  radicale:
+    container_name: radicale
+    image: ugeek/radicale:arm
+    ports:
+      - 86:5232
+    depends_on:
+      - caddy
+    volumes:
+      - $DATA/radicale/:/data/radicale/collections
+
   # # Caddy: reverse proxy
   # * Resources:
   # - https://hub.docker.com/_/caddy
@@ -152,6 +165,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    depends_on:
+      - pihole
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - ./certs/:/root/certs # to sync mkcert certificates to Caddy
