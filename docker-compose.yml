@@ -144,15 +144,31 @@ services:
   # # Radicale: CalDAV server
   # * Resources:
   # - https://hub.docker.com/r/ugeek/radicale
-  radicale:
-    container_name: radicale
-    image: ugeek/radicale:arm
+  # radicale:
+  #   container_name: radicale
+  #   image: ugeek/radicale:arm
+  #   restart: unless-stopped
+  #   ports:
+  #     - 86:5232
+  #   depends_on:
+  #     - caddy
+  #   volumes:
+  #     - $DATA/radicale/data:/data/radicale/collections
+
+  # # NextCloud: Local cloud
+  # * Resources:
+  # - https://hub.docker.com/r/ownyourbits/nextcloudpi
+  nextcloud:
+    container_name: nextcloud
+    image: ownyourbits/nextcloudpi
+    restart: unless-stopped
     ports:
-      - 86:5232
+      - 86:80
+      - 88:443
     depends_on:
       - caddy
     volumes:
-      - $DATA/radicale/:/data/radicale/collections
+      - ./nextcloud/data/:/data
 
   # # Caddy: reverse proxy
   # * Resources:

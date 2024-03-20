@@ -7,8 +7,8 @@
 * [Cloudflared](https://github.com/crazy-max/docker-cloudflared): proxy-DNS for [DoH](https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/).
 * [Caddy](https://hub.docker.com/\_/caddy): reverse proxy.
 * [Vaultwarden](https://github.com/dani-garcia/vaultwarden): password manager.
-* [Openbooks](https://github.com/evan-buss/openbooks): ebook downloader.
 * [Wallabag](https://github.com/wallabag/wallabag): read later/bookmarks app.
+* [Nextcloud](https://nextcloud.com/): local cloud.
 
 ## Things that I usually forgot
 
