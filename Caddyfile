@@ -55,7 +55,10 @@ tab.local, tab.box {
 
 cloud.local, cloud.box, 08511df7d904 {
   tls /root/certs/cert.pem /root/certs/key.pem
-  reverse_proxy nextcloud:443
+  reverse_proxy nextcloud:443 {
+    header_up Host {upstream_hostport}
+    header_up X-Real-IP {remote_host}
+  }
 }
 
 photos.local, photos.box {

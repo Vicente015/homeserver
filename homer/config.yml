@@ -79,7 +79,7 @@ services:
         url: "https://cloud.box"
       - name: "Photoprism"
         subtitle: "Visor de fotos aumentado con visión artificial"
-        logo: "assets/icons/photoprism.svg",
+        logo: "assets/icons/photoprism.png"
         url: "https://photos.box"
 
   - name: "Sistema"
