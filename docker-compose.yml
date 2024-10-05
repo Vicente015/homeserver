@@ -170,6 +170,21 @@ services:
     volumes:
       - ./nextcloud/data/:/data
 
+  # # Spotifyd: Stream music to rpi
+  # * Resources:
+  # - https://blog.structed.me/posts/raspberrypi-spotify-music-station
+  # - https://hub.docker.com/r/rohmilkaese/spotifyd
+  spotifyd:
+    container_name: spotifyd
+    image: rohmilkaese/spotifyd:latest
+    restart: unless-
+    network_mode: "host"
+    volumes:
+      - /usr/share/alsa:/usr/share/alsa
+      - ./spotifyd/spotifyd.conf:/etc/spotifyd.conf:ro
+    devices:
+      - /dev/snd
+
   # # Caddy: reverse proxy
   # * Resources:
   # - https://hub.docker.com/_/caddy
